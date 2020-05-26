@@ -8,6 +8,7 @@ import lombok.Data;
  * DemoReq
  */
 @Data
+
 @Builder
 public class DemoReq extends BaseRequest {
 

@@ -15,6 +15,7 @@
 
     <modules>
         <module>demoproject-api</module>
+        <module>demoproject-batch</module>
         <module>demoproject-core</module>
         <module>demoproject-dal</module>
     </modules>
