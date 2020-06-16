@@ -1,6 +1,6 @@
-package com.lovefn.demoproject.api.entity.result;
+package com.lovefn.demoproject.api.vo.result;
 
-import com.lovefn.grace.common.service.entity.BaseResult;
+import com.lovefn.grace.common.service.entity.IBaseResultVo;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class DemoResult extends BaseResult {
+public class DemoResVo implements IBaseResultVo {
 
     private static final long serialVersionUID = 83526217681861L;
 

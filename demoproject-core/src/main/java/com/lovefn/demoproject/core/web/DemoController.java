@@ -1,8 +1,8 @@
 package com.lovefn.demoproject.core.web;
 
 
-import com.lovefn.demoproject.api.entity.request.DemoReq;
-import com.lovefn.demoproject.api.entity.result.DemoResult;
+import com.lovefn.demoproject.api.vo.request.DemoReqVo;
+import com.lovefn.demoproject.api.vo.result.DemoResVo;
 import com.lovefn.demoproject.api.service.DemoService;
 import com.lovefn.grace.common.service.entity.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +31,8 @@ public class DemoController {
      * test
      */
     @RequestMapping(path = "test/service", method = {RequestMethod.GET})
-    public Response<DemoResult> testService() {
-        DemoReq req = DemoReq.builder()
+    public Response<DemoResVo> testService() {
+        DemoReqVo req = DemoReqVo.builder()
                 .runtime("run on :" + System.currentTimeMillis())
                 .build();
         return demoService.run(req);

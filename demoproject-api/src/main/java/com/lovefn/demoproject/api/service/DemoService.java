@@ -1,8 +1,8 @@
 package com.lovefn.demoproject.api.service;
 
 
-import com.lovefn.demoproject.api.entity.request.DemoReq;
-import com.lovefn.demoproject.api.entity.result.DemoResult;
+import com.lovefn.demoproject.api.vo.request.DemoReqVo;
+import com.lovefn.demoproject.api.vo.result.DemoResVo;
 import com.lovefn.grace.common.service.entity.Response;
 
 
@@ -11,9 +11,11 @@ public interface DemoService {
     /**
      * demoService
      *
-     * @param demoReq
+     * @param demoReqVo
      * @return
      */
-    Response<DemoResult> run(DemoReq demoReq);
+    Response<DemoResVo> run(DemoReqVo demoReqVo);
+
+    Response<DemoResVo> runInLambda(DemoReqVo demoReqVo);
 
 }

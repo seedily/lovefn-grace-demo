@@ -1,11 +1,16 @@
 package com.lovefn.demoproject.core.service.impl;
 
-import com.lovefn.demoproject.api.entity.request.DemoReq;
-import com.lovefn.demoproject.api.entity.result.DemoResult;
 import com.lovefn.demoproject.api.service.DemoService;
+import com.lovefn.demoproject.api.vo.request.DemoReqVo;
+import com.lovefn.demoproject.api.vo.result.DemoResVo;
+import com.lovefn.demoproject.core.manager.DemoManager;
+import com.lovefn.grace.common.service.callback.ServiceCallback;
+import com.lovefn.grace.common.service.entity.IBaseResultVo;
 import com.lovefn.grace.common.service.entity.Response;
+import com.lovefn.grace.common.service.exception.ServiceFailException;
 import com.lovefn.grace.common.service.template.ServiceTemplate;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +18,41 @@ import org.springframework.stereotype.Service;
  * create on 20190825
  */
 @Data
+@Slf4j
 @Service
 public class DemoServiceImpl implements DemoService {
 
     @Autowired
-    private ServiceTemplate serviceTemplate;
+    private DemoManager demoManager;
 
     @Override
-    public Response<DemoResult> run(DemoReq demoReq) {
-        Response response = serviceTemplate.execute(() -> {
-            DemoResult demoResult = DemoResult.builder().runtime(demoReq.getRuntime()).build();
-            return demoResult;
+    public Response<DemoResVo> run(DemoReqVo demoReqVo) {
+        Response response = ServiceTemplate.execute(new ServiceCallback() {
+            @Override
+            public void lock() {
+                log.info("run lock");
+            }
+
+            @Override
+            public void unlock() {
+                log.info("run unlock");
+            }
+
+            @Override
+            public IBaseResultVo executeService() throws ServiceFailException {
+                return demoManager.runDemoLogic(demoReqVo);
+            }
         });
         return response;
     }
+
+
+    @Override
+    public Response<DemoResVo> runInLambda(DemoReqVo demoReqVo) {
+        Response response = ServiceTemplate.execute(() -> {
+            return demoManager.runDemoLogic(demoReqVo);
+        });
+        return response;
+    }
+
 }

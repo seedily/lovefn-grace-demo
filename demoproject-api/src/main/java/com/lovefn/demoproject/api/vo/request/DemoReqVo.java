@@ -1,6 +1,6 @@
-package com.lovefn.demoproject.api.entity.request;
+package com.lovefn.demoproject.api.vo.request;
 
-import com.lovefn.grace.common.service.entity.BaseRequest;
+import com.lovefn.grace.common.service.entity.IBaseRequestVo;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 
 @Builder
-public class DemoReq extends BaseRequest {
+public class DemoReqVo implements IBaseRequestVo {
 
     private static final long serialVersionUID = 13526218681867L;
 
