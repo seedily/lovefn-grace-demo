@@ -10,15 +10,15 @@
     <groupId>com.lovefn</groupId>
     <artifactId>demoproject-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demoproject-api</name>
-    <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
+
+    <name>demoproject-api</name>
+    <description>Api service, entity, constant</description>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>com.lovefn.grace</groupId>
+            <artifactId>grace-starter-commonapi</artifactId>
         </dependency>
     </dependencies>
 

@@ -4,11 +4,10 @@ import com.lovefn.demoproject.api.service.DemoService;
 import com.lovefn.demoproject.api.vo.request.DemoReqVo;
 import com.lovefn.demoproject.api.vo.result.DemoResVo;
 import com.lovefn.demoproject.core.manager.DemoManager;
-import com.lovefn.grace.common.service.callback.ServiceCallback;
-import com.lovefn.grace.common.service.entity.IBaseResultVo;
-import com.lovefn.grace.common.service.entity.Response;
-import com.lovefn.grace.common.service.exception.ServiceFailException;
-import com.lovefn.grace.common.service.template.ServiceTemplate;
+import com.lovefn.grace.common.api.entity.Response;
+import com.lovefn.grace.common.code.callback.ServiceCallback;
+import com.lovefn.grace.common.code.exception.ServiceFailException;
+import com.lovefn.grace.common.code.template.ServiceTemplate;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class DemoServiceImpl implements DemoService {
             }
 
             @Override
-            public IBaseResultVo executeService() throws ServiceFailException {
+            public DemoResVo executeService() throws ServiceFailException {
                 return demoManager.runDemoLogic(demoReqVo);
             }
         });
@@ -51,6 +50,14 @@ public class DemoServiceImpl implements DemoService {
     public Response<DemoResVo> runInLambda(DemoReqVo demoReqVo) {
         Response response = ServiceTemplate.execute(() -> {
             return demoManager.runDemoLogic(demoReqVo);
+        });
+        return response;
+    }
+
+    @Override
+    public Response<DemoResVo> testErr(DemoReqVo demoReqVo) {
+        Response response = ServiceTemplate.execute(() -> {
+            throw new RuntimeException("testErr");
         });
         return response;
     }

@@ -10,11 +10,16 @@
     <groupId>com.lovefn</groupId>
     <artifactId>demoproject-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demoproject-core</name>
-    <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
 
+    <name>demoproject-core</name>
+    <description>main service logic</description>
+
     <dependencies>
+        <dependency>
+            <groupId>com.lovefn.grace</groupId>
+            <artifactId>grace-starter-commoncode</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.lovefn</groupId>
             <artifactId>demoproject-api</artifactId>
@@ -28,8 +33,56 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude>*.properties</exclude>
+                        <exclude>assembly/**</exclude>
+                        <exclude>script/**</exclude>
+                        <exclude>config/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archiverConfig>
+                        <defaultDirectoryMode>0755</defaultDirectoryMode>
+                    </archiverConfig>
+                </configuration>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <!--满足自动编译系统的规则，放到target/package/main目录下，这种和编译系统耦合的做法比较奇葩-->
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors> <!--描述文件路径-->
+                                <descriptor>src/main/resources/assembly/dir.xml</descriptor>
+                            </descriptors>
+                            <finalName>package</finalName>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <id>make-dir</id>
+                        <phase>package</phase>
+                    </execution>
+                    <execution>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>src/main/resources/assembly/zip.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <id>make-zip</id>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <version>2.6</version>
             </plugin>
         </plugins>
     </build>

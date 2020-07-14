@@ -4,7 +4,7 @@ package com.lovefn.demoproject.core.web;
 import com.lovefn.demoproject.api.vo.request.DemoReqVo;
 import com.lovefn.demoproject.api.vo.result.DemoResVo;
 import com.lovefn.demoproject.api.service.DemoService;
-import com.lovefn.grace.common.service.entity.Response;
+import com.lovefn.grace.common.api.entity.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,5 +36,17 @@ public class DemoController {
                 .runtime("run on :" + System.currentTimeMillis())
                 .build();
         return demoService.run(req);
+    }
+
+
+    /**
+     * test
+     */
+    @RequestMapping(path = "test/err", method = {RequestMethod.GET})
+    public Response<DemoResVo> testErr() {
+        DemoReqVo req = DemoReqVo.builder()
+                .runtime("run on :" + System.currentTimeMillis())
+                .build();
+        return demoService.testErr(req);
     }
 }

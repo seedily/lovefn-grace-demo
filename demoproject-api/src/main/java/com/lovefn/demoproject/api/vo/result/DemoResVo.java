@@ -1,15 +1,16 @@
 package com.lovefn.demoproject.api.vo.result;
 
-import com.lovefn.grace.common.service.entity.IBaseResultVo;
 import lombok.Builder;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * DemoResult
  */
 @Data
 @Builder
-public class DemoResVo implements IBaseResultVo {
+public class DemoResVo implements Serializable {
 
     private static final long serialVersionUID = 83526217681861L;
 
