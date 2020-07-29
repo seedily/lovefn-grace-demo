@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generator.properties"/>
+    <context id="MySqlContext" targetRuntime="MyBatis3">
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
+        <property name="autoDelimitKeywords" value="false"/>
+        <!-- beginning\endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <!-- 为模型生成序列化方法-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--生成hashCode和equals方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!--这个插件将方法添加到Example类（实际上是Criteria内部类）以支持不区分大小写的LIKE搜索 -->
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+
+        <!-- 自定义工具 -->
+        <plugin type="com.lovefn.grace.mybatis.generator.LombokRemarksPlugin"/>
+        <plugin type="com.lovefn.grace.mybatis.generator.BatchInsertPlugin"/>
+        <plugin type="com.lovefn.grace.mybatis.generator.SelectForUpdatePlugin"/>
+        <plugin type="com.lovefn.grace.mybatis.generator.PaginationPlugin"/>
+
+        <commentGenerator>
+            <!--关闭myBatis原注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+            <!--解决mysql驱动升级到8.0后不生成指定数据库代码的问题-->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+            <!--开启读取数据库注释：为了把注释写到相对应的注解里面-->
+            <property name="remarksReporting" value="true"/>
+        </jdbcConnection>
+
+        <!--
+            java类型处理器
+            用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
+            注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
+        -->
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <!--
+                true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+                false：默认,将按以下场景生成
+                    scale>0;length>18：使用BigDecimal;
+                    scale=0;length[10,18]：使用Long；
+                    scale=0;length[5,9]：使用Integer；
+                    scale=0;length<5：使用Short；
+             -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+
+        <javaModelGenerator targetPackage="${generator.javaModel.targetPackage}"
+                            targetProject="${dal.generator.javaModel.dir}">
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${generator.sqlMapper.targetPackage}"
+                         targetProject="${dal.generator.sqlMapper.dir}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${generator.javaClient.targetPackage}"
+                             targetProject="${dal.generator.javaModel.dir}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--table配置用于生成映射对象Model、操作接口Dao-->
+
+        <table schema="testdb" tableName="t_regulate_config">
+            <!-- Tips: 如需对原生*Mapper添加其他自定义的方法，如联表查询，可以通过添加父类方式实现，方案如下：
+            1. 命名格式遵循*ExtMapper，并做好rootInterface配置（示例如下property标签）
+            2. 需要手工添加配套的*ExtMapper.xml（namespace指向*ExtMapper），建议拷贝原生*Mapper.xml再编辑
+            注意：切忌在原生*Mapper上编辑，以免因为覆盖而丢失 -->
+            <!-- <property name="rootInterface" value="com.*.dao.*ExtMapper"/>-->
+        </table>
+
+    </context>
+</generatorConfiguration>

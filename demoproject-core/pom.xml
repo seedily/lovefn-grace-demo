@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.lovefn.grace</groupId>
-            <artifactId>grace-starter-commoncode</artifactId>
+            <artifactId>grace-starter-tiny</artifactId>
         </dependency>
         <dependency>
             <groupId>com.lovefn</groupId>
@@ -55,7 +55,6 @@
                 <executions>
                     <execution>
                         <configuration>
-                            <!--满足自动编译系统的规则，放到target/package/main目录下，这种和编译系统耦合的做法比较奇葩-->
                             <appendAssemblyId>false</appendAssemblyId>
                             <descriptors> <!--描述文件路径-->
                                 <descriptor>src/main/resources/assembly/dir.xml</descriptor>

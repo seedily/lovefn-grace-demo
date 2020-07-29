@@ -22,12 +22,6 @@
             <fileMode>0755</fileMode>
         </fileSet>
     </fileSets>
-<!--    <files>-->
-<!--        <file>-->
-<!--            <source>fit_installer.xml</source>-->
-<!--            <outputDirectory>./</outputDirectory>-->
-<!--        </file>-->
-<!--    </files>-->
 
     <dependencySets>
         <dependencySet>

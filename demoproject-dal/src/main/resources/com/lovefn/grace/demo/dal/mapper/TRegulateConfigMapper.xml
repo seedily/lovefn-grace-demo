@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lovefn.grace.demo.dal.dao.TRegulateConfigMapper">
+  <resultMap id="BaseResultMap" type="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    <id column="Fid" jdbcType="INTEGER" property="fid" />
+    <result column="Fchannel_id" jdbcType="INTEGER" property="fchannelId" />
+    <result column="Fpriority" jdbcType="INTEGER" property="fpriority" />
+    <result column="Factive_flag" jdbcType="INTEGER" property="factiveFlag" />
+    <result column="Fdel_flag" jdbcType="INTEGER" property="fdelFlag" />
+    <result column="Fmod_count" jdbcType="INTEGER" property="fmodCount" />
+    <result column="Fhash" jdbcType="VARCHAR" property="fhash" />
+    <result column="Fcreate_user" jdbcType="VARCHAR" property="fcreateUser" />
+    <result column="Fcreate_time" jdbcType="TIMESTAMP" property="fcreateTime" />
+    <result column="Fmodify_user" jdbcType="VARCHAR" property="fmodifyUser" />
+    <result column="Fmodify_time" jdbcType="TIMESTAMP" property="fmodifyTime" />
+    <result column="Fmodify_desc" jdbcType="VARCHAR" property="fmodifyDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Fid, Fchannel_id, Fpriority, Factive_flag, Fdel_flag, Fmod_count, Fhash, Fcreate_user, 
+    Fcreate_time, Fmodify_user, Fmodify_time, Fmodify_desc
+  </sql>
+  <select id="selectByExample" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_regulate_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="forUpdate != null and forUpdate&gt;=0">
+      for update wait #{forUpdate}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_regulate_config
+    where Fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_regulate_config
+    where Fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfigExample">
+    delete from t_regulate_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    insert into t_regulate_config (Fid, Fchannel_id, Fpriority, 
+      Factive_flag, Fdel_flag, Fmod_count, 
+      Fhash, Fcreate_user, Fcreate_time, 
+      Fmodify_user, Fmodify_time, Fmodify_desc
+      )
+    values (#{fid,jdbcType=INTEGER}, #{fchannelId,jdbcType=INTEGER}, #{fpriority,jdbcType=INTEGER}, 
+      #{factiveFlag,jdbcType=INTEGER}, #{fdelFlag,jdbcType=INTEGER}, #{fmodCount,jdbcType=INTEGER}, 
+      #{fhash,jdbcType=VARCHAR}, #{fcreateUser,jdbcType=VARCHAR}, #{fcreateTime,jdbcType=TIMESTAMP}, 
+      #{fmodifyUser,jdbcType=VARCHAR}, #{fmodifyTime,jdbcType=TIMESTAMP}, #{fmodifyDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    insert into t_regulate_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        Fid,
+      </if>
+      <if test="fchannelId != null">
+        Fchannel_id,
+      </if>
+      <if test="fpriority != null">
+        Fpriority,
+      </if>
+      <if test="factiveFlag != null">
+        Factive_flag,
+      </if>
+      <if test="fdelFlag != null">
+        Fdel_flag,
+      </if>
+      <if test="fmodCount != null">
+        Fmod_count,
+      </if>
+      <if test="fhash != null">
+        Fhash,
+      </if>
+      <if test="fcreateUser != null">
+        Fcreate_user,
+      </if>
+      <if test="fcreateTime != null">
+        Fcreate_time,
+      </if>
+      <if test="fmodifyUser != null">
+        Fmodify_user,
+      </if>
+      <if test="fmodifyTime != null">
+        Fmodify_time,
+      </if>
+      <if test="fmodifyDesc != null">
+        Fmodify_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fchannelId != null">
+        #{fchannelId,jdbcType=INTEGER},
+      </if>
+      <if test="fpriority != null">
+        #{fpriority,jdbcType=INTEGER},
+      </if>
+      <if test="factiveFlag != null">
+        #{factiveFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fdelFlag != null">
+        #{fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fmodCount != null">
+        #{fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="fhash != null">
+        #{fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateUser != null">
+        #{fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateTime != null">
+        #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyUser != null">
+        #{fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifyTime != null">
+        #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyDesc != null">
+        #{fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfigExample" resultType="java.lang.Long">
+    select count(*) from t_regulate_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_regulate_config
+    <set>
+      <if test="record.fid != null">
+        Fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fchannelId != null">
+        Fchannel_id = #{record.fchannelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpriority != null">
+        Fpriority = #{record.fpriority,jdbcType=INTEGER},
+      </if>
+      <if test="record.factiveFlag != null">
+        Factive_flag = #{record.factiveFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdelFlag != null">
+        Fdel_flag = #{record.fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodCount != null">
+        Fmod_count = #{record.fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fhash != null">
+        Fhash = #{record.fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreateUser != null">
+        Fcreate_user = #{record.fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreateTime != null">
+        Fcreate_time = #{record.fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifyUser != null">
+        Fmodify_user = #{record.fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmodifyTime != null">
+        Fmodify_time = #{record.fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifyDesc != null">
+        Fmodify_desc = #{record.fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_regulate_config
+    set Fid = #{record.fid,jdbcType=INTEGER},
+      Fchannel_id = #{record.fchannelId,jdbcType=INTEGER},
+      Fpriority = #{record.fpriority,jdbcType=INTEGER},
+      Factive_flag = #{record.factiveFlag,jdbcType=INTEGER},
+      Fdel_flag = #{record.fdelFlag,jdbcType=INTEGER},
+      Fmod_count = #{record.fmodCount,jdbcType=INTEGER},
+      Fhash = #{record.fhash,jdbcType=VARCHAR},
+      Fcreate_user = #{record.fcreateUser,jdbcType=VARCHAR},
+      Fcreate_time = #{record.fcreateTime,jdbcType=TIMESTAMP},
+      Fmodify_user = #{record.fmodifyUser,jdbcType=VARCHAR},
+      Fmodify_time = #{record.fmodifyTime,jdbcType=TIMESTAMP},
+      Fmodify_desc = #{record.fmodifyDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    update t_regulate_config
+    <set>
+      <if test="fchannelId != null">
+        Fchannel_id = #{fchannelId,jdbcType=INTEGER},
+      </if>
+      <if test="fpriority != null">
+        Fpriority = #{fpriority,jdbcType=INTEGER},
+      </if>
+      <if test="factiveFlag != null">
+        Factive_flag = #{factiveFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fdelFlag != null">
+        Fdel_flag = #{fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fmodCount != null">
+        Fmod_count = #{fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="fhash != null">
+        Fhash = #{fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateUser != null">
+        Fcreate_user = #{fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateTime != null">
+        Fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyUser != null">
+        Fmodify_user = #{fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifyTime != null">
+        Fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyDesc != null">
+        Fmodify_desc = #{fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    update t_regulate_config
+    set Fchannel_id = #{fchannelId,jdbcType=INTEGER},
+      Fpriority = #{fpriority,jdbcType=INTEGER},
+      Factive_flag = #{factiveFlag,jdbcType=INTEGER},
+      Fdel_flag = #{fdelFlag,jdbcType=INTEGER},
+      Fmod_count = #{fmodCount,jdbcType=INTEGER},
+      Fhash = #{fhash,jdbcType=VARCHAR},
+      Fcreate_user = #{fcreateUser,jdbcType=VARCHAR},
+      Fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      Fmodify_user = #{fmodifyUser,jdbcType=VARCHAR},
+      Fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      Fmodify_desc = #{fmodifyDesc,jdbcType=VARCHAR}
+    where Fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into t_regulate_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      Fid,
+      Fchannel_id,
+      Fpriority,
+      Factive_flag,
+      Fdel_flag,
+      Fmod_count,
+      Fhash,
+      Fcreate_user,
+      Fcreate_time,
+      Fmodify_user,
+      Fmodify_time,
+      Fmodify_desc,
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        #{item.fid,jdbcType=INTEGER},
+        #{item.fchannelId,jdbcType=INTEGER},
+        #{item.fpriority,jdbcType=INTEGER},
+        #{item.factiveFlag,jdbcType=INTEGER},
+        #{item.fdelFlag,jdbcType=INTEGER},
+        #{item.fmodCount,jdbcType=INTEGER},
+        #{item.fhash,jdbcType=VARCHAR},
+        #{item.fcreateUser,jdbcType=VARCHAR},
+        #{item.fcreateTime,jdbcType=TIMESTAMP},
+        #{item.fmodifyUser,jdbcType=VARCHAR},
+        #{item.fmodifyTime,jdbcType=TIMESTAMP},
+        #{item.fmodifyDesc,jdbcType=VARCHAR},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into t_regulate_config
+    <foreach close=")" collection="columns" index="index" item="item" open="(" separator=",">
+      ${item}
+    </foreach>
+     values 
+    <foreach collection="records" index="index" item="record" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <foreach collection="columns" index="index" item="column">
+          <if test="'Fid' == column">
+            #{record.fid,jdbcType=INTEGER},
+          </if>
+          <if test="'Fchannel_id' == column">
+            #{record.fchannelId,jdbcType=INTEGER},
+          </if>
+          <if test="'Fpriority' == column">
+            #{record.fpriority,jdbcType=INTEGER},
+          </if>
+          <if test="'Factive_flag' == column">
+            #{record.factiveFlag,jdbcType=INTEGER},
+          </if>
+          <if test="'Fdel_flag' == column">
+            #{record.fdelFlag,jdbcType=INTEGER},
+          </if>
+          <if test="'Fmod_count' == column">
+            #{record.fmodCount,jdbcType=INTEGER},
+          </if>
+          <if test="'Fhash' == column">
+            #{record.fhash,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fcreate_user' == column">
+            #{record.fcreateUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fcreate_time' == column">
+            #{record.fcreateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Fmodify_user' == column">
+            #{record.fmodifyUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmodify_time' == column">
+            #{record.fmodifyTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Fmodify_desc' == column">
+            #{record.fmodifyDesc,jdbcType=VARCHAR},
+          </if>
+        </foreach>
+      </trim>
+    </foreach>
+  </insert>
+  <resultMap id="BaseResultMap" type="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    <id column="Fid" jdbcType="INTEGER" property="fid" />
+    <result column="Fchannel_id" jdbcType="INTEGER" property="fchannelId" />
+    <result column="Fpriority" jdbcType="INTEGER" property="fpriority" />
+    <result column="Factive_flag" jdbcType="INTEGER" property="factiveFlag" />
+    <result column="Fdel_flag" jdbcType="INTEGER" property="fdelFlag" />
+    <result column="Fmod_count" jdbcType="INTEGER" property="fmodCount" />
+    <result column="Fhash" jdbcType="VARCHAR" property="fhash" />
+    <result column="Fcreate_user" jdbcType="VARCHAR" property="fcreateUser" />
+    <result column="Fcreate_time" jdbcType="TIMESTAMP" property="fcreateTime" />
+    <result column="Fmodify_user" jdbcType="VARCHAR" property="fmodifyUser" />
+    <result column="Fmodify_time" jdbcType="TIMESTAMP" property="fmodifyTime" />
+    <result column="Fmodify_desc" jdbcType="VARCHAR" property="fmodifyDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Fid, Fchannel_id, Fpriority, Factive_flag, Fdel_flag, Fmod_count, Fhash, Fcreate_user, 
+    Fcreate_time, Fmodify_user, Fmodify_time, Fmodify_desc
+  </sql>
+  <select id="selectByExample" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_regulate_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="forUpdate != null and forUpdate&gt;=0">
+      for update wait #{forUpdate}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_regulate_config
+    where Fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_regulate_config
+    where Fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfigExample">
+    delete from t_regulate_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    insert into t_regulate_config (Fid, Fchannel_id, Fpriority, 
+      Factive_flag, Fdel_flag, Fmod_count, 
+      Fhash, Fcreate_user, Fcreate_time, 
+      Fmodify_user, Fmodify_time, Fmodify_desc
+      )
+    values (#{fid,jdbcType=INTEGER}, #{fchannelId,jdbcType=INTEGER}, #{fpriority,jdbcType=INTEGER}, 
+      #{factiveFlag,jdbcType=INTEGER}, #{fdelFlag,jdbcType=INTEGER}, #{fmodCount,jdbcType=INTEGER}, 
+      #{fhash,jdbcType=VARCHAR}, #{fcreateUser,jdbcType=VARCHAR}, #{fcreateTime,jdbcType=TIMESTAMP}, 
+      #{fmodifyUser,jdbcType=VARCHAR}, #{fmodifyTime,jdbcType=TIMESTAMP}, #{fmodifyDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    insert into t_regulate_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        Fid,
+      </if>
+      <if test="fchannelId != null">
+        Fchannel_id,
+      </if>
+      <if test="fpriority != null">
+        Fpriority,
+      </if>
+      <if test="factiveFlag != null">
+        Factive_flag,
+      </if>
+      <if test="fdelFlag != null">
+        Fdel_flag,
+      </if>
+      <if test="fmodCount != null">
+        Fmod_count,
+      </if>
+      <if test="fhash != null">
+        Fhash,
+      </if>
+      <if test="fcreateUser != null">
+        Fcreate_user,
+      </if>
+      <if test="fcreateTime != null">
+        Fcreate_time,
+      </if>
+      <if test="fmodifyUser != null">
+        Fmodify_user,
+      </if>
+      <if test="fmodifyTime != null">
+        Fmodify_time,
+      </if>
+      <if test="fmodifyDesc != null">
+        Fmodify_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fchannelId != null">
+        #{fchannelId,jdbcType=INTEGER},
+      </if>
+      <if test="fpriority != null">
+        #{fpriority,jdbcType=INTEGER},
+      </if>
+      <if test="factiveFlag != null">
+        #{factiveFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fdelFlag != null">
+        #{fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fmodCount != null">
+        #{fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="fhash != null">
+        #{fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateUser != null">
+        #{fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateTime != null">
+        #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyUser != null">
+        #{fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifyTime != null">
+        #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyDesc != null">
+        #{fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfigExample" resultType="java.lang.Long">
+    select count(*) from t_regulate_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_regulate_config
+    <set>
+      <if test="record.fid != null">
+        Fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fchannelId != null">
+        Fchannel_id = #{record.fchannelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpriority != null">
+        Fpriority = #{record.fpriority,jdbcType=INTEGER},
+      </if>
+      <if test="record.factiveFlag != null">
+        Factive_flag = #{record.factiveFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdelFlag != null">
+        Fdel_flag = #{record.fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodCount != null">
+        Fmod_count = #{record.fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fhash != null">
+        Fhash = #{record.fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreateUser != null">
+        Fcreate_user = #{record.fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreateTime != null">
+        Fcreate_time = #{record.fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifyUser != null">
+        Fmodify_user = #{record.fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmodifyTime != null">
+        Fmodify_time = #{record.fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifyDesc != null">
+        Fmodify_desc = #{record.fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_regulate_config
+    set Fid = #{record.fid,jdbcType=INTEGER},
+      Fchannel_id = #{record.fchannelId,jdbcType=INTEGER},
+      Fpriority = #{record.fpriority,jdbcType=INTEGER},
+      Factive_flag = #{record.factiveFlag,jdbcType=INTEGER},
+      Fdel_flag = #{record.fdelFlag,jdbcType=INTEGER},
+      Fmod_count = #{record.fmodCount,jdbcType=INTEGER},
+      Fhash = #{record.fhash,jdbcType=VARCHAR},
+      Fcreate_user = #{record.fcreateUser,jdbcType=VARCHAR},
+      Fcreate_time = #{record.fcreateTime,jdbcType=TIMESTAMP},
+      Fmodify_user = #{record.fmodifyUser,jdbcType=VARCHAR},
+      Fmodify_time = #{record.fmodifyTime,jdbcType=TIMESTAMP},
+      Fmodify_desc = #{record.fmodifyDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    update t_regulate_config
+    <set>
+      <if test="fchannelId != null">
+        Fchannel_id = #{fchannelId,jdbcType=INTEGER},
+      </if>
+      <if test="fpriority != null">
+        Fpriority = #{fpriority,jdbcType=INTEGER},
+      </if>
+      <if test="factiveFlag != null">
+        Factive_flag = #{factiveFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fdelFlag != null">
+        Fdel_flag = #{fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fmodCount != null">
+        Fmod_count = #{fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="fhash != null">
+        Fhash = #{fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateUser != null">
+        Fcreate_user = #{fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateTime != null">
+        Fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyUser != null">
+        Fmodify_user = #{fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifyTime != null">
+        Fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifyDesc != null">
+        Fmodify_desc = #{fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lovefn.grace.demo.dal.model.TRegulateConfig">
+    update t_regulate_config
+    set Fchannel_id = #{fchannelId,jdbcType=INTEGER},
+      Fpriority = #{fpriority,jdbcType=INTEGER},
+      Factive_flag = #{factiveFlag,jdbcType=INTEGER},
+      Fdel_flag = #{fdelFlag,jdbcType=INTEGER},
+      Fmod_count = #{fmodCount,jdbcType=INTEGER},
+      Fhash = #{fhash,jdbcType=VARCHAR},
+      Fcreate_user = #{fcreateUser,jdbcType=VARCHAR},
+      Fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      Fmodify_user = #{fmodifyUser,jdbcType=VARCHAR},
+      Fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      Fmodify_desc = #{fmodifyDesc,jdbcType=VARCHAR}
+    where Fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into t_regulate_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      Fid,
+      Fchannel_id,
+      Fpriority,
+      Factive_flag,
+      Fdel_flag,
+      Fmod_count,
+      Fhash,
+      Fcreate_user,
+      Fcreate_time,
+      Fmodify_user,
+      Fmodify_time,
+      Fmodify_desc,
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        #{item.fid,jdbcType=INTEGER},
+        #{item.fchannelId,jdbcType=INTEGER},
+        #{item.fpriority,jdbcType=INTEGER},
+        #{item.factiveFlag,jdbcType=INTEGER},
+        #{item.fdelFlag,jdbcType=INTEGER},
+        #{item.fmodCount,jdbcType=INTEGER},
+        #{item.fhash,jdbcType=VARCHAR},
+        #{item.fcreateUser,jdbcType=VARCHAR},
+        #{item.fcreateTime,jdbcType=TIMESTAMP},
+        #{item.fmodifyUser,jdbcType=VARCHAR},
+        #{item.fmodifyTime,jdbcType=TIMESTAMP},
+        #{item.fmodifyDesc,jdbcType=VARCHAR},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into t_regulate_config
+    <foreach close=")" collection="columns" index="index" item="item" open="(" separator=",">
+      ${item}
+    </foreach>
+     values 
+    <foreach collection="records" index="index" item="record" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <foreach collection="columns" index="index" item="column">
+          <if test="'Fid' == column">
+            #{record.fid,jdbcType=INTEGER},
+          </if>
+          <if test="'Fchannel_id' == column">
+            #{record.fchannelId,jdbcType=INTEGER},
+          </if>
+          <if test="'Fpriority' == column">
+            #{record.fpriority,jdbcType=INTEGER},
+          </if>
+          <if test="'Factive_flag' == column">
+            #{record.factiveFlag,jdbcType=INTEGER},
+          </if>
+          <if test="'Fdel_flag' == column">
+            #{record.fdelFlag,jdbcType=INTEGER},
+          </if>
+          <if test="'Fmod_count' == column">
+            #{record.fmodCount,jdbcType=INTEGER},
+          </if>
+          <if test="'Fhash' == column">
+            #{record.fhash,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fcreate_user' == column">
+            #{record.fcreateUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fcreate_time' == column">
+            #{record.fcreateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Fmodify_user' == column">
+            #{record.fmodifyUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmodify_time' == column">
+            #{record.fmodifyTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Fmodify_desc' == column">
+            #{record.fmodifyDesc,jdbcType=VARCHAR},
+          </if>
+        </foreach>
+      </trim>
+    </foreach>
+  </insert>
+</mapper>

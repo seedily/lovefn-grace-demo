@@ -10,13 +10,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  */
 @Slf4j
 @SpringBootApplication
-public abstract class DemoprojectApplication extends SpringBootServletInitializer {
+public class Application extends SpringBootServletInitializer {
 
     /**
      * Starting
      */
     public static void main(String[] args) {
-        SpringApplication.run(DemoprojectApplication.class, args);
+        SpringApplication.run(Application.class, args);
         log.info("============== start finish ==================");
     }
 
