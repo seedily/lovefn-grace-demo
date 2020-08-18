@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * table : t_regulate_config
- * Created by Mybatis Generator on 2020-07-28
+ * Created by Mybatis Generator on 2020-08-18
  */
 @SuppressWarnings("all")
 @Mapper

@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lovefn.grace.demo.dal.dao.TStrategyMsgMsgConfig2Mapper">
+  <resultMap id="BaseResultMap" type="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2">
+    <id column="Fid" jdbcType="VARCHAR" property="fid" />
+    <result column="Fmodify_time" jdbcType="TIMESTAMP" property="fmodifyTime" />
+    <result column="Fcreate_time" jdbcType="TIMESTAMP" property="fcreateTime" />
+    <result column="Fcreate_user" jdbcType="VARCHAR" property="fcreateUser" />
+    <result column="Flast_operation_time" jdbcType="TIMESTAMP" property="flastOperationTime" />
+    <result column="Flast_operation_user" jdbcType="VARCHAR" property="flastOperationUser" />
+    <result column="Ftemplate_id" jdbcType="VARCHAR" property="ftemplateId" />
+    <result column="Fmsg_title" jdbcType="VARCHAR" property="fmsgTitle" />
+    <result column="Fmsg_content" jdbcType="VARCHAR" property="fmsgContent" />
+    <result column="Fmsg_keywords" jdbcType="VARCHAR" property="fmsgKeywords" />
+    <result column="Fmsg_remark" jdbcType="VARCHAR" property="fmsgRemark" />
+    <result column="Fjump_type" jdbcType="VARCHAR" property="fjumpType" />
+    <result column="Fjump_link_name" jdbcType="VARCHAR" property="fjumpLinkName" />
+    <result column="Fjump_link_url" jdbcType="VARCHAR" property="fjumpLinkUrl" />
+    <result column="Fvars" jdbcType="VARCHAR" property="fvars" />
+    <result column="Faudit_state" jdbcType="INTEGER" property="fauditState" />
+    <result column="Faudit_user" jdbcType="VARCHAR" property="fauditUser" />
+    <result column="Faudit_time" jdbcType="TIMESTAMP" property="fauditTime" />
+    <result column="Fmsg_id" jdbcType="VARCHAR" property="fmsgId" />
+    <result column="Fmsg_channel" jdbcType="VARCHAR" property="fmsgChannel" />
+    <result column="Fmodify_user" jdbcType="VARCHAR" property="fmodifyUser" />
+    <result column="Fmod_count" jdbcType="INTEGER" property="fmodCount" />
+    <result column="Fhash" jdbcType="VARCHAR" property="fhash" />
+    <result column="Fedit_flag" jdbcType="INTEGER" property="feditFlag" />
+    <result column="Fdel_flag" jdbcType="INTEGER" property="fdelFlag" />
+    <result column="Fmodify_desc" jdbcType="VARCHAR" property="fmodifyDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Fid, Fmodify_time, Fcreate_time, Fcreate_user, Flast_operation_time, Flast_operation_user, 
+    Ftemplate_id, Fmsg_title, Fmsg_content, Fmsg_keywords, Fmsg_remark, Fjump_type, Fjump_link_name, 
+    Fjump_link_url, Fvars, Faudit_state, Faudit_user, Faudit_time, Fmsg_id, Fmsg_channel, 
+    Fmodify_user, Fmod_count, Fhash, Fedit_flag, Fdel_flag, Fmodify_desc
+  </sql>
+  <select id="selectByExample" parameterType="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_strategy_msg_msg_config2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="forUpdate != null and forUpdate>=0">
+      for update wait #{forUpdate}
+    </if>
+    <if test="limitStart != null and limitStart>=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_strategy_msg_msg_config2
+    where Fid = #{fid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_strategy_msg_msg_config2
+    where Fid = #{fid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2Example">
+    delete from t_strategy_msg_msg_config2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2">
+    insert into t_strategy_msg_msg_config2 (Fid, Fmodify_time, Fcreate_time, 
+      Fcreate_user, Flast_operation_time, Flast_operation_user, 
+      Ftemplate_id, Fmsg_title, Fmsg_content, 
+      Fmsg_keywords, Fmsg_remark, Fjump_type, 
+      Fjump_link_name, Fjump_link_url, Fvars, 
+      Faudit_state, Faudit_user, Faudit_time, 
+      Fmsg_id, Fmsg_channel, Fmodify_user, 
+      Fmod_count, Fhash, Fedit_flag, 
+      Fdel_flag, Fmodify_desc)
+    values (#{fid,jdbcType=VARCHAR}, #{fmodifyTime,jdbcType=TIMESTAMP}, #{fcreateTime,jdbcType=TIMESTAMP}, 
+      #{fcreateUser,jdbcType=VARCHAR}, #{flastOperationTime,jdbcType=TIMESTAMP}, #{flastOperationUser,jdbcType=VARCHAR}, 
+      #{ftemplateId,jdbcType=VARCHAR}, #{fmsgTitle,jdbcType=VARCHAR}, #{fmsgContent,jdbcType=VARCHAR}, 
+      #{fmsgKeywords,jdbcType=VARCHAR}, #{fmsgRemark,jdbcType=VARCHAR}, #{fjumpType,jdbcType=VARCHAR}, 
+      #{fjumpLinkName,jdbcType=VARCHAR}, #{fjumpLinkUrl,jdbcType=VARCHAR}, #{fvars,jdbcType=VARCHAR}, 
+      #{fauditState,jdbcType=INTEGER}, #{fauditUser,jdbcType=VARCHAR}, #{fauditTime,jdbcType=TIMESTAMP}, 
+      #{fmsgId,jdbcType=VARCHAR}, #{fmsgChannel,jdbcType=VARCHAR}, #{fmodifyUser,jdbcType=VARCHAR}, 
+      #{fmodCount,jdbcType=INTEGER}, #{fhash,jdbcType=VARCHAR}, #{feditFlag,jdbcType=INTEGER}, 
+      #{fdelFlag,jdbcType=INTEGER}, #{fmodifyDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2">
+    insert into t_strategy_msg_msg_config2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        Fid,
+      </if>
+      <if test="fmodifyTime != null">
+        Fmodify_time,
+      </if>
+      <if test="fcreateTime != null">
+        Fcreate_time,
+      </if>
+      <if test="fcreateUser != null">
+        Fcreate_user,
+      </if>
+      <if test="flastOperationTime != null">
+        Flast_operation_time,
+      </if>
+      <if test="flastOperationUser != null">
+        Flast_operation_user,
+      </if>
+      <if test="ftemplateId != null">
+        Ftemplate_id,
+      </if>
+      <if test="fmsgTitle != null">
+        Fmsg_title,
+      </if>
+      <if test="fmsgContent != null">
+        Fmsg_content,
+      </if>
+      <if test="fmsgKeywords != null">
+        Fmsg_keywords,
+      </if>
+      <if test="fmsgRemark != null">
+        Fmsg_remark,
+      </if>
+      <if test="fjumpType != null">
+        Fjump_type,
+      </if>
+      <if test="fjumpLinkName != null">
+        Fjump_link_name,
+      </if>
+      <if test="fjumpLinkUrl != null">
+        Fjump_link_url,
+      </if>
+      <if test="fvars != null">
+        Fvars,
+      </if>
+      <if test="fauditState != null">
+        Faudit_state,
+      </if>
+      <if test="fauditUser != null">
+        Faudit_user,
+      </if>
+      <if test="fauditTime != null">
+        Faudit_time,
+      </if>
+      <if test="fmsgId != null">
+        Fmsg_id,
+      </if>
+      <if test="fmsgChannel != null">
+        Fmsg_channel,
+      </if>
+      <if test="fmodifyUser != null">
+        Fmodify_user,
+      </if>
+      <if test="fmodCount != null">
+        Fmod_count,
+      </if>
+      <if test="fhash != null">
+        Fhash,
+      </if>
+      <if test="feditFlag != null">
+        Fedit_flag,
+      </if>
+      <if test="fdelFlag != null">
+        Fdel_flag,
+      </if>
+      <if test="fmodifyDesc != null">
+        Fmodify_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifyTime != null">
+        #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateTime != null">
+        #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateUser != null">
+        #{fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="flastOperationTime != null">
+        #{flastOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastOperationUser != null">
+        #{flastOperationUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ftemplateId != null">
+        #{ftemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgTitle != null">
+        #{fmsgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgContent != null">
+        #{fmsgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgKeywords != null">
+        #{fmsgKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgRemark != null">
+        #{fmsgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fjumpType != null">
+        #{fjumpType,jdbcType=VARCHAR},
+      </if>
+      <if test="fjumpLinkName != null">
+        #{fjumpLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="fjumpLinkUrl != null">
+        #{fjumpLinkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fvars != null">
+        #{fvars,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditState != null">
+        #{fauditState,jdbcType=INTEGER},
+      </if>
+      <if test="fauditUser != null">
+        #{fauditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditTime != null">
+        #{fauditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmsgId != null">
+        #{fmsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgChannel != null">
+        #{fmsgChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifyUser != null">
+        #{fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodCount != null">
+        #{fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="fhash != null">
+        #{fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="feditFlag != null">
+        #{feditFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fdelFlag != null">
+        #{fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifyDesc != null">
+        #{fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2Example" resultType="java.lang.Long">
+    select count(*) from t_strategy_msg_msg_config2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_strategy_msg_msg_config2
+    <set>
+      <if test="record.fid != null">
+        Fid = #{record.fid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmodifyTime != null">
+        Fmodify_time = #{record.fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateTime != null">
+        Fcreate_time = #{record.fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateUser != null">
+        Fcreate_user = #{record.fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastOperationTime != null">
+        Flast_operation_time = #{record.flastOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastOperationUser != null">
+        Flast_operation_user = #{record.flastOperationUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftemplateId != null">
+        Ftemplate_id = #{record.ftemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmsgTitle != null">
+        Fmsg_title = #{record.fmsgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmsgContent != null">
+        Fmsg_content = #{record.fmsgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmsgKeywords != null">
+        Fmsg_keywords = #{record.fmsgKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmsgRemark != null">
+        Fmsg_remark = #{record.fmsgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fjumpType != null">
+        Fjump_type = #{record.fjumpType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fjumpLinkName != null">
+        Fjump_link_name = #{record.fjumpLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fjumpLinkUrl != null">
+        Fjump_link_url = #{record.fjumpLinkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fvars != null">
+        Fvars = #{record.fvars,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fauditState != null">
+        Faudit_state = #{record.fauditState,jdbcType=INTEGER},
+      </if>
+      <if test="record.fauditUser != null">
+        Faudit_user = #{record.fauditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fauditTime != null">
+        Faudit_time = #{record.fauditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmsgId != null">
+        Fmsg_id = #{record.fmsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmsgChannel != null">
+        Fmsg_channel = #{record.fmsgChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmodifyUser != null">
+        Fmodify_user = #{record.fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmodCount != null">
+        Fmod_count = #{record.fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fhash != null">
+        Fhash = #{record.fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feditFlag != null">
+        Fedit_flag = #{record.feditFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdelFlag != null">
+        Fdel_flag = #{record.fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodifyDesc != null">
+        Fmodify_desc = #{record.fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_strategy_msg_msg_config2
+    set Fid = #{record.fid,jdbcType=VARCHAR},
+      Fmodify_time = #{record.fmodifyTime,jdbcType=TIMESTAMP},
+      Fcreate_time = #{record.fcreateTime,jdbcType=TIMESTAMP},
+      Fcreate_user = #{record.fcreateUser,jdbcType=VARCHAR},
+      Flast_operation_time = #{record.flastOperationTime,jdbcType=TIMESTAMP},
+      Flast_operation_user = #{record.flastOperationUser,jdbcType=VARCHAR},
+      Ftemplate_id = #{record.ftemplateId,jdbcType=VARCHAR},
+      Fmsg_title = #{record.fmsgTitle,jdbcType=VARCHAR},
+      Fmsg_content = #{record.fmsgContent,jdbcType=VARCHAR},
+      Fmsg_keywords = #{record.fmsgKeywords,jdbcType=VARCHAR},
+      Fmsg_remark = #{record.fmsgRemark,jdbcType=VARCHAR},
+      Fjump_type = #{record.fjumpType,jdbcType=VARCHAR},
+      Fjump_link_name = #{record.fjumpLinkName,jdbcType=VARCHAR},
+      Fjump_link_url = #{record.fjumpLinkUrl,jdbcType=VARCHAR},
+      Fvars = #{record.fvars,jdbcType=VARCHAR},
+      Faudit_state = #{record.fauditState,jdbcType=INTEGER},
+      Faudit_user = #{record.fauditUser,jdbcType=VARCHAR},
+      Faudit_time = #{record.fauditTime,jdbcType=TIMESTAMP},
+      Fmsg_id = #{record.fmsgId,jdbcType=VARCHAR},
+      Fmsg_channel = #{record.fmsgChannel,jdbcType=VARCHAR},
+      Fmodify_user = #{record.fmodifyUser,jdbcType=VARCHAR},
+      Fmod_count = #{record.fmodCount,jdbcType=INTEGER},
+      Fhash = #{record.fhash,jdbcType=VARCHAR},
+      Fedit_flag = #{record.feditFlag,jdbcType=INTEGER},
+      Fdel_flag = #{record.fdelFlag,jdbcType=INTEGER},
+      Fmodify_desc = #{record.fmodifyDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2">
+    update t_strategy_msg_msg_config2
+    <set>
+      <if test="fmodifyTime != null">
+        Fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateTime != null">
+        Fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateUser != null">
+        Fcreate_user = #{fcreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="flastOperationTime != null">
+        Flast_operation_time = #{flastOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastOperationUser != null">
+        Flast_operation_user = #{flastOperationUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ftemplateId != null">
+        Ftemplate_id = #{ftemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgTitle != null">
+        Fmsg_title = #{fmsgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgContent != null">
+        Fmsg_content = #{fmsgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgKeywords != null">
+        Fmsg_keywords = #{fmsgKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgRemark != null">
+        Fmsg_remark = #{fmsgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fjumpType != null">
+        Fjump_type = #{fjumpType,jdbcType=VARCHAR},
+      </if>
+      <if test="fjumpLinkName != null">
+        Fjump_link_name = #{fjumpLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="fjumpLinkUrl != null">
+        Fjump_link_url = #{fjumpLinkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fvars != null">
+        Fvars = #{fvars,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditState != null">
+        Faudit_state = #{fauditState,jdbcType=INTEGER},
+      </if>
+      <if test="fauditUser != null">
+        Faudit_user = #{fauditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditTime != null">
+        Faudit_time = #{fauditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmsgId != null">
+        Fmsg_id = #{fmsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="fmsgChannel != null">
+        Fmsg_channel = #{fmsgChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodifyUser != null">
+        Fmodify_user = #{fmodifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fmodCount != null">
+        Fmod_count = #{fmodCount,jdbcType=INTEGER},
+      </if>
+      <if test="fhash != null">
+        Fhash = #{fhash,jdbcType=VARCHAR},
+      </if>
+      <if test="feditFlag != null">
+        Fedit_flag = #{feditFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fdelFlag != null">
+        Fdel_flag = #{fdelFlag,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifyDesc != null">
+        Fmodify_desc = #{fmodifyDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Fid = #{fid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lovefn.grace.demo.dal.model.TStrategyMsgMsgConfig2">
+    update t_strategy_msg_msg_config2
+    set Fmodify_time = #{fmodifyTime,jdbcType=TIMESTAMP},
+      Fcreate_time = #{fcreateTime,jdbcType=TIMESTAMP},
+      Fcreate_user = #{fcreateUser,jdbcType=VARCHAR},
+      Flast_operation_time = #{flastOperationTime,jdbcType=TIMESTAMP},
+      Flast_operation_user = #{flastOperationUser,jdbcType=VARCHAR},
+      Ftemplate_id = #{ftemplateId,jdbcType=VARCHAR},
+      Fmsg_title = #{fmsgTitle,jdbcType=VARCHAR},
+      Fmsg_content = #{fmsgContent,jdbcType=VARCHAR},
+      Fmsg_keywords = #{fmsgKeywords,jdbcType=VARCHAR},
+      Fmsg_remark = #{fmsgRemark,jdbcType=VARCHAR},
+      Fjump_type = #{fjumpType,jdbcType=VARCHAR},
+      Fjump_link_name = #{fjumpLinkName,jdbcType=VARCHAR},
+      Fjump_link_url = #{fjumpLinkUrl,jdbcType=VARCHAR},
+      Fvars = #{fvars,jdbcType=VARCHAR},
+      Faudit_state = #{fauditState,jdbcType=INTEGER},
+      Faudit_user = #{fauditUser,jdbcType=VARCHAR},
+      Faudit_time = #{fauditTime,jdbcType=TIMESTAMP},
+      Fmsg_id = #{fmsgId,jdbcType=VARCHAR},
+      Fmsg_channel = #{fmsgChannel,jdbcType=VARCHAR},
+      Fmodify_user = #{fmodifyUser,jdbcType=VARCHAR},
+      Fmod_count = #{fmodCount,jdbcType=INTEGER},
+      Fhash = #{fhash,jdbcType=VARCHAR},
+      Fedit_flag = #{feditFlag,jdbcType=INTEGER},
+      Fdel_flag = #{fdelFlag,jdbcType=INTEGER},
+      Fmodify_desc = #{fmodifyDesc,jdbcType=VARCHAR}
+    where Fid = #{fid,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into t_strategy_msg_msg_config2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      Fid,
+      Fmodify_time,
+      Fcreate_time,
+      Fcreate_user,
+      Flast_operation_time,
+      Flast_operation_user,
+      Ftemplate_id,
+      Fmsg_title,
+      Fmsg_content,
+      Fmsg_keywords,
+      Fmsg_remark,
+      Fjump_type,
+      Fjump_link_name,
+      Fjump_link_url,
+      Fvars,
+      Faudit_state,
+      Faudit_user,
+      Faudit_time,
+      Fmsg_id,
+      Fmsg_channel,
+      Fmodify_user,
+      Fmod_count,
+      Fhash,
+      Fedit_flag,
+      Fdel_flag,
+      Fmodify_desc,
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        #{item.fid,jdbcType=VARCHAR},
+        #{item.fmodifyTime,jdbcType=TIMESTAMP},
+        #{item.fcreateTime,jdbcType=TIMESTAMP},
+        #{item.fcreateUser,jdbcType=VARCHAR},
+        #{item.flastOperationTime,jdbcType=TIMESTAMP},
+        #{item.flastOperationUser,jdbcType=VARCHAR},
+        #{item.ftemplateId,jdbcType=VARCHAR},
+        #{item.fmsgTitle,jdbcType=VARCHAR},
+        #{item.fmsgContent,jdbcType=VARCHAR},
+        #{item.fmsgKeywords,jdbcType=VARCHAR},
+        #{item.fmsgRemark,jdbcType=VARCHAR},
+        #{item.fjumpType,jdbcType=VARCHAR},
+        #{item.fjumpLinkName,jdbcType=VARCHAR},
+        #{item.fjumpLinkUrl,jdbcType=VARCHAR},
+        #{item.fvars,jdbcType=VARCHAR},
+        #{item.fauditState,jdbcType=INTEGER},
+        #{item.fauditUser,jdbcType=VARCHAR},
+        #{item.fauditTime,jdbcType=TIMESTAMP},
+        #{item.fmsgId,jdbcType=VARCHAR},
+        #{item.fmsgChannel,jdbcType=VARCHAR},
+        #{item.fmodifyUser,jdbcType=VARCHAR},
+        #{item.fmodCount,jdbcType=INTEGER},
+        #{item.fhash,jdbcType=VARCHAR},
+        #{item.feditFlag,jdbcType=INTEGER},
+        #{item.fdelFlag,jdbcType=INTEGER},
+        #{item.fmodifyDesc,jdbcType=VARCHAR},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    insert into t_strategy_msg_msg_config2
+    <foreach close=")" collection="columns" index="index" item="item" open="(" separator=",">
+      ${item}
+    </foreach>
+     values 
+    <foreach collection="records" index="index" item="record" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <foreach collection="columns" index="index" item="column">
+          <if test="'Fid' == column">
+            #{record.fid,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmodify_time' == column">
+            #{record.fmodifyTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Fcreate_time' == column">
+            #{record.fcreateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Fcreate_user' == column">
+            #{record.fcreateUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Flast_operation_time' == column">
+            #{record.flastOperationTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Flast_operation_user' == column">
+            #{record.flastOperationUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Ftemplate_id' == column">
+            #{record.ftemplateId,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmsg_title' == column">
+            #{record.fmsgTitle,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmsg_content' == column">
+            #{record.fmsgContent,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmsg_keywords' == column">
+            #{record.fmsgKeywords,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmsg_remark' == column">
+            #{record.fmsgRemark,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fjump_type' == column">
+            #{record.fjumpType,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fjump_link_name' == column">
+            #{record.fjumpLinkName,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fjump_link_url' == column">
+            #{record.fjumpLinkUrl,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fvars' == column">
+            #{record.fvars,jdbcType=VARCHAR},
+          </if>
+          <if test="'Faudit_state' == column">
+            #{record.fauditState,jdbcType=INTEGER},
+          </if>
+          <if test="'Faudit_user' == column">
+            #{record.fauditUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Faudit_time' == column">
+            #{record.fauditTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="'Fmsg_id' == column">
+            #{record.fmsgId,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmsg_channel' == column">
+            #{record.fmsgChannel,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmodify_user' == column">
+            #{record.fmodifyUser,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fmod_count' == column">
+            #{record.fmodCount,jdbcType=INTEGER},
+          </if>
+          <if test="'Fhash' == column">
+            #{record.fhash,jdbcType=VARCHAR},
+          </if>
+          <if test="'Fedit_flag' == column">
+            #{record.feditFlag,jdbcType=INTEGER},
+          </if>
+          <if test="'Fdel_flag' == column">
+            #{record.fdelFlag,jdbcType=INTEGER},
+          </if>
+          <if test="'Fmodify_desc' == column">
+            #{record.fmodifyDesc,jdbcType=VARCHAR},
+          </if>
+        </foreach>
+      </trim>
+    </foreach>
+  </insert>
+</mapper>

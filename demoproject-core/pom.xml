@@ -45,43 +45,27 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!--  deploy时，需要注释掉如下，否则会将整个zip包deploy到远程-->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <archiverConfig>
-                        <defaultDirectoryMode>0755</defaultDirectoryMode>
-                    </archiverConfig>
+                    <finalName>${project.artifactId}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>src/main/resources/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors> <!--描述文件路径-->
-                                <descriptor>src/main/resources/assembly/dir.xml</descriptor>
-                            </descriptors>
-                            <finalName>package</finalName>
-                        </configuration>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <id>make-dir</id>
-                        <phase>package</phase>
-                    </execution>
-                    <execution>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>src/main/resources/assembly/zip.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
                         <id>make-zip</id>
                         <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
-                <version>2.6</version>
             </plugin>
         </plugins>
     </build>
